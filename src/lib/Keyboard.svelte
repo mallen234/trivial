@@ -1,22 +1,35 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  export let guess;
-  import { firstRow, secondRow, thirdRow } from "../helpers/helperConsts";
-  const takeGuess = () => {};
+  export let guess: Writable<string>;
+  export let handleGuess: (guess: string) => void;
+  import {
+    firstRow,
+    secondRow,
+    thirdRow,
+    fourthRow,
+  } from "../helpers/helperConsts";
+  import type { Writable } from "svelte/store";
+
+  let guess_value: string;
+  guess.subscribe((value) => {
+    guess_value = value;
+  });
+  const letterList =
+    "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".split("");
 
   const handleKeypress = (event: KeyboardEvent) => {
     const key = event.key.toUpperCase();
     if (key === "Enter" || key === "ENTER") {
-      takeGuess();
+      handleGuess(guess_value);
     } else if (key === "del" || key === "BACKSPACE") {
       guess.update((guess: string) => guess.slice(0, -1));
-    } else {
-      guess.update((v: string) => v + key);
+    } else if (letterList.includes(key)) {
+      guess.update((v: string) => v + key.toUpperCase());
     }
   };
   const handleClick = (key: string) => {
     if (key === "Enter") {
-      takeGuess();
+      handleGuess(guess_value);
     } else if (key === "\u232B") {
       guess.update((guess: string) => guess.slice(0, -1));
     } else {
@@ -58,6 +71,14 @@
       >
     {/each}
   </div>
+  <div class="keyboard">
+    <button
+      on:click={() => handleClick(" ")}
+      aria-label={"space"}
+      class="keyboard-element"
+    >
+    </button>
+  </div>
 </div>
 
 <style>
@@ -66,6 +87,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 5px;
+    max-width: 500px;
   }
   .keyboard {
     display: flex;
@@ -73,7 +95,6 @@
     /* flex-wrap: wrap; */
     justify-content: space-evenly;
     gap: 5px;
-    max-width: 100%;
   }
   .keyboard-element {
     font-size: large;
@@ -85,7 +106,7 @@
     border: white;
     background-color: white;
     border-radius: 0.4rem;
-    /* box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.9); */
+    box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid #eee;
   }
   .keyboard > button:hover {

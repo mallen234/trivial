@@ -1,31 +1,50 @@
 <script lang="ts">
-  import Answer from "./lib/Answer.svelte";
+  import AnswerInput from "./lib/AnswerInput.svelte";
   import Counter from "./lib/Counter.svelte";
   import Keyboard from "./lib/Keyboard.svelte";
   import { questionBank } from "./api/questions";
-  import { setContext } from "svelte";
-  import { userGuess } from "./svelte/store";
+  import { userGuess, isGuessCorrect, cluesCount } from "./svelte/store";
+  import Congrats from "./lib/Congrats.svelte";
+  import Questions from "./lib/Questions.svelte";
 
-  setContext("userGuess", {
-    userGuess,
+  let isGuessCorrect_value: boolean;
+  const todaysQuestion = questionBank[0];
+  let cluesCount_value: number;
+  isGuessCorrect.subscribe((value) => {
+    isGuessCorrect_value = value;
   });
+  cluesCount.subscribe((value) => {
+    cluesCount_value = value;
+  });
+
+  const handleGuess = (guess: string) => {
+    todaysQuestion.link.forEach((link) => {
+      console.log(link, guess);
+      if (link.includes(guess)) {
+        isGuessCorrect.set(true);
+      }
+    });
+  };
 </script>
 
 <div class="title" aria-label="Title">
   <h2>Trivial</h2>
 </div>
 <main class="main">
+  <Questions {todaysQuestion} {cluesCount} />
   <div>
-    <p>1 : {questionBank[0].question1}</p>
-    <p>2 : {questionBank[0].question2}</p>
-    <p>3 : {questionBank[0].question3}</p>
+    <p>Clues used : {cluesCount_value}</p>
   </div>
-
-  <div>
-    <Answer guess={userGuess} />
-  </div>
-
-  <Keyboard guess={userGuess} />
+  {#if isGuessCorrect_value === false}
+    <div>
+      <AnswerInput guess={userGuess} />
+    </div>
+    <div class="keyboard">
+      <Keyboard guess={userGuess} {handleGuess} />
+    </div>
+  {:else if isGuessCorrect_value === true}
+    <Congrats cluesUsed={cluesCount_value} />
+  {/if}
 </main>
 
 <style>
@@ -44,6 +63,7 @@
 
     /* padding: 0rem 1rem 0rem 1rem; */
     min-width: none;
+    max-width: 500px;
     font-family: "Sansita", sans-serif;
     font-size: large;
     font-weight: 600;
@@ -51,8 +71,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
   .answer {
     align-items: center;
+  }
+  .keyboard {
+    /* display: flex; */
   }
 </style>
