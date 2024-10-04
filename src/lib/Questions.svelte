@@ -12,24 +12,31 @@
     question2BackgroundColour: string,
     question3BackgroundColour: string = "#FFFFFF";
 
+  let question1Click: boolean = false;
+  let question2Click: boolean = false;
+  let question3Click: boolean = false;
+
   const handleQuestionOneClick = () => {
-    if (question1BackgroundColour != "#FFEE8C") {
+    if (!question1Click) {
       question1BackgroundColour = "#FFEE8C";
       cluesCount.update((value) => value + 1);
+      question1Click = true;
     }
   };
 
   const handleQuestionTwoClick = () => {
-    if (question2BackgroundColour != "#FFEE8C") {
+    if (!question2Click) {
       question2BackgroundColour = "#FFEE8C";
       cluesCount.update((value) => value + 1);
+      question2Click = true;
     }
   };
 
   const handleQuestionThreeClick = () => {
-    if (question3BackgroundColour != "#FFEE8C") {
+    if (!question3Click) {
       question3BackgroundColour = "#FFEE8C";
       cluesCount.update((value) => value + 1);
+      question3Click = true;
     }
   };
 </script>
@@ -39,17 +46,23 @@
     class="question"
     on:click={handleQuestionOneClick}
     style:background-color={question1BackgroundColour}
-    >1 : {todaysQuestion.question1}
+    >1 : {question1Click ? todaysQuestion.answer1 : todaysQuestion.question1}
   </button>
   <button
     on:click={handleQuestionTwoClick}
     style:background-color={question2BackgroundColour}
-    class="question">2 : {todaysQuestion.question2}</button
+    class="question"
+    >2 : {question2Click
+      ? todaysQuestion.answer2
+      : todaysQuestion.question2}</button
   >
   <button
     on:click={handleQuestionThreeClick}
     style:background-color={question3BackgroundColour}
-    class="question">3 : {todaysQuestion.question3}</button
+    class="question"
+    >3 : {question3Click
+      ? todaysQuestion.answer3
+      : todaysQuestion.question3}</button
   >
 </div>
 

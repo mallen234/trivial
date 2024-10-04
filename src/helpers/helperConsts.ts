@@ -1,4 +1,3 @@
-export const firstRow = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-export const secondRow = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-export const thirdRow = ["Enter", "Z", "X", "C", "V", "B", "N", "M", "\u232B"];
-export const fourthRow = ["space"];
+export const firstRow = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
+export const secondRow = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+export const thirdRow = ["z", "x", "c", "v", "b", "n", "m"];

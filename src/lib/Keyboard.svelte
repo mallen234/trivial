@@ -2,12 +2,7 @@
   import { onMount } from "svelte";
   export let guess: Writable<string>;
   export let handleGuess: (guess: string) => void;
-  import {
-    firstRow,
-    secondRow,
-    thirdRow,
-    fourthRow,
-  } from "../helpers/helperConsts";
+  import { firstRow, secondRow, thirdRow } from "../helpers/helperConsts";
   import type { Writable } from "svelte/store";
 
   let guess_value: string;
@@ -15,7 +10,7 @@
     guess_value = value;
   });
   const letterList =
-    "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".split("");
+    "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM ".split("");
 
   const handleKeypress = (event: KeyboardEvent) => {
     const key = event.key.toUpperCase();
@@ -24,7 +19,7 @@
     } else if (key === "del" || key === "BACKSPACE") {
       guess.update((guess: string) => guess.slice(0, -1));
     } else if (letterList.includes(key)) {
-      guess.update((v: string) => v + key.toUpperCase());
+      guess.update((v: string) => v + key.toLowerCase());
     }
   };
   const handleClick = (key: string) => {
@@ -73,10 +68,22 @@
   </div>
   <div class="keyboard">
     <button
+      on:click={() => handleClick("Enter")}
+      aria-label={"Enter"}
+      class="enter"
+      >Enter
+    </button>
+    <button
       on:click={() => handleClick(" ")}
       aria-label={"space"}
-      class="keyboard-element"
+      class="space-key"
     >
+    </button>
+    <button
+      on:click={() => handleClick("\u232B")}
+      aria-label={"backspace"}
+      class="backspace"
+      >⌫
     </button>
   </div>
 </div>
@@ -92,11 +99,13 @@
   .keyboard {
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
     justify-content: space-evenly;
     gap: 5px;
   }
-  .keyboard-element {
+  .keyboard-element,
+  .space-key,
+  .enter,
+  .backspace {
     font-size: large;
     font-weight: 400;
     height: 2.75rem;
@@ -111,5 +120,15 @@
   }
   .keyboard > button:hover {
     opacity: 0.8;
+  }
+
+  .space-key {
+    width: 80%;
+  }
+  .backspace {
+    width: 20%;
+  }
+  .enter {
+    width: 25%;
   }
 </style>
