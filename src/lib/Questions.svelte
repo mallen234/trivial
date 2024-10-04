@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
-
+  import { colorPalate } from "../helpers/theme";
   export let cluesCount: Writable<number>;
 
   let cluesCount_value: number;
@@ -10,7 +10,7 @@
   export let todaysQuestion;
   let question1BackgroundColour: string,
     question2BackgroundColour: string,
-    question3BackgroundColour: string = "#FFFFFF";
+    question3BackgroundColour: string = colorPalate.white;
 
   let question1Click: boolean = false;
   let question2Click: boolean = false;
@@ -18,7 +18,7 @@
 
   const handleQuestionOneClick = () => {
     if (!question1Click) {
-      question1BackgroundColour = "#FFEE8C";
+      question1BackgroundColour = colorPalate.base;
       cluesCount.update((value) => value + 1);
       question1Click = true;
     }
@@ -26,7 +26,7 @@
 
   const handleQuestionTwoClick = () => {
     if (!question2Click) {
-      question2BackgroundColour = "#FFEE8C";
+      question2BackgroundColour = colorPalate.base;
       cluesCount.update((value) => value + 1);
       question2Click = true;
     }
@@ -34,7 +34,7 @@
 
   const handleQuestionThreeClick = () => {
     if (!question3Click) {
-      question3BackgroundColour = "#FFEE8C";
+      question3BackgroundColour = colorPalate.base;
       cluesCount.update((value) => value + 1);
       question3Click = true;
     }
