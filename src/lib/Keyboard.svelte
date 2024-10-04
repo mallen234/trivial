@@ -47,24 +47,27 @@
     {/each}
   </div>
 
-  <div class="keyboard">
-    {#each { length: secondRow.length } as _, i}
-      <button
-        on:click={() => handleClick(secondRow[i])}
-        aria-label={secondRow[i]}
-        class="keyboard-element">{secondRow[i]}</button
-      >
-    {/each}
+  <div class="keyboard-second-row">
+    <div class="keyboard">
+      {#each { length: secondRow.length } as _, i}
+        <button
+          on:click={() => handleClick(secondRow[i])}
+          aria-label={secondRow[i]}
+          class="keyboard-element">{secondRow[i]}</button
+        >
+      {/each}
+    </div>
   </div>
-
-  <div class="keyboard">
-    {#each { length: thirdRow.length } as _, i}
-      <button
-        on:click={() => handleClick(thirdRow[i])}
-        aria-label={thirdRow[i]}
-        class="keyboard-element">{thirdRow[i]}</button
-      >
-    {/each}
+  <div class="keyboard-third-row">
+    <div class="keyboard">
+      {#each { length: thirdRow.length } as _, i}
+        <button
+          on:click={() => handleClick(thirdRow[i])}
+          aria-label={thirdRow[i]}
+          class="keyboard-element">{thirdRow[i]}</button
+        >
+      {/each}
+    </div>
   </div>
   <div class="keyboard">
     <button
@@ -102,12 +105,21 @@
     justify-content: space-evenly;
     gap: 5px;
   }
+
+  .keyboard-second-row {
+    align-self: center;
+    width: 90%;
+  }
+  .keyboard-third-row {
+    align-self: center;
+    width: 80%;
+  }
   .keyboard-element,
   .space-key,
   .enter,
   .backspace {
     font-size: large;
-    font-weight: 400;
+    font-weight: 600;
     height: 2.75rem;
     flex-grow: 1;
     box-sizing: border-box;
