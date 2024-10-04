@@ -19,7 +19,6 @@ Make sure you have Node.js installed on your machine.
 1. Clone the repository:
 
 ```
-bash
 Copy code
 git clone https://github.com/yourusername/your-repo-name.git
 ```
@@ -27,7 +26,6 @@ git clone https://github.com/yourusername/your-repo-name.git
 2. Navigate to the project directory:
 
 ```
-bash
 Copy code
 cd your-repo-name
 ```
@@ -35,7 +33,6 @@ cd your-repo-name
 3. Install the dependencies:
 
 ```
-bash
 Copy code
 npm install
 ```
