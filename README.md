@@ -1,13 +1,8 @@
 ## Simple Quiz Game
 
-A simple quiz game built with Svelte and Vite. Test your knowledge with a series of questions and see how well you score!
+A simple quiz game built with Svelte and Vite.
 
-### Features
-
-Interactive quiz interface
-Multiple-choice questions
-Real-time score tracking
-Responsive design for all devices
+A series of questions are shown on screen with an overarching link
 
 ### Technologies Used
 
@@ -16,7 +11,7 @@ Vite: A fast build tool and development server.
 
 ### Getting Started
 
-####Prerequisites
+#### Prerequisites
 Make sure you have Node.js installed on your machine.
 
 #### Installation
