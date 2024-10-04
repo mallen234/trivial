@@ -1,6 +1,5 @@
 <script lang="ts">
   import AnswerInput from "./lib/AnswerInput.svelte";
-  import Counter from "./lib/Counter.svelte";
   import Keyboard from "./lib/Keyboard.svelte";
   import { questionBank } from "./api/questions";
   import { userGuess, isGuessCorrect, cluesCount } from "./svelte/store";
@@ -76,11 +75,5 @@
     left: 0;
     right: 0;
     margin: auto;
-  }
-  .answer {
-    align-items: center;
-  }
-  .keyboard {
-    /* display: flex; */
   }
 </style>
