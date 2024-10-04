@@ -1,4 +1,4 @@
-## Simple Quiz Game
+# Simple Quiz Game
 
 A simple quiz game built with Svelte and Vite.
 
