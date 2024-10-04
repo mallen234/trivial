@@ -1,4 +1,4 @@
-## Simple Quiz Game
+# Simple Quiz Game
 
 A simple quiz game built with Svelte and Vite.
 
@@ -19,21 +19,18 @@ Make sure you have Node.js installed on your machine.
 1. Clone the repository:
 
 ```
-Copy code
 git clone https://github.com/yourusername/your-repo-name.git
 ```
 
 2. Navigate to the project directory:
 
 ```
-Copy code
 cd your-repo-name
 ```
 
 3. Install the dependencies:
 
 ```
-Copy code
 npm install
 ```
 
@@ -42,8 +39,6 @@ npm install
 To start the development server, run:
 
 ```
-bash
-Copy code
 npm run dev
 ```
 
