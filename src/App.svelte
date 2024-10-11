@@ -6,6 +6,7 @@
   import { userGuess, isGuessCorrect, cluesCount } from "./svelte/store";
   import Congrats from "./lib/Congrats.svelte";
   import Questions from "./lib/Questions.svelte";
+  import Header from "./lib/Header.svelte";
 
   let isGuessCorrect_value: boolean;
   const todaysQuestion = questionBank[0];
@@ -18,45 +19,41 @@
   });
 
   const handleGuess = (guess: string) => {
-    todaysQuestion.link.forEach((link) => {
-      console.log(link, guess);
-      if (link.includes(guess)) {
-        isGuessCorrect.set(true);
-      }
-    });
+    if (todaysQuestion.link.includes(guess)) {
+      isGuessCorrect.set(true);
+    }
+
+    // todaysQuestion.link.forEach((link) => {
+    //   console.log({ guess });
+    //   console.log(link, guess);
+    //   if (link.includes(guess)) {
+    //     isGuessCorrect.set(true);
+    //   }
+    // });
   };
 </script>
 
-<div class="title" aria-label="Title">
-  <h2>Trivial</h2>
-</div>
-<main class="main">
-  <Questions {todaysQuestion} {cluesCount} />
-  <div>
-    <p>Clues used : {cluesCount_value}</p>
-  </div>
-  {#if isGuessCorrect_value === false}
+<main>
+  <Header />
+  <div class="main">
+    <Questions {todaysQuestion} {cluesCount} />
     <div>
-      <AnswerInput guess={userGuess} />
+      <p>Clues used : {cluesCount_value}</p>
     </div>
-    <div class="keyboard">
-      <Keyboard guess={userGuess} {handleGuess} />
-    </div>
-  {:else if isGuessCorrect_value === true}
-    <Congrats cluesUsed={cluesCount_value} />
-  {/if}
+    {#if isGuessCorrect_value === false}
+      <div>
+        <AnswerInput guess={userGuess} />
+      </div>
+      <div class="keyboard">
+        <Keyboard guess={userGuess} {handleGuess} />
+      </div>
+    {:else if isGuessCorrect_value === true}
+      <Congrats cluesUsed={cluesCount_value} />
+    {/if}
+  </div>
 </main>
 
 <style>
-  .title {
-    height: 15vh;
-    background-color: white;
-    font-size: x-large;
-    font-family: "Lobster";
-    align-items: center;
-    justify-content: center;
-    display: flex;
-  }
   .main {
     background-color: #d5e8ff;
     background-color: #ffced3;
