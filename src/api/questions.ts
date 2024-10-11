@@ -7,7 +7,7 @@ const questionLink1: QuestionLink = {
   answer1: "Southgate",
   answer2: "Ericsson",
   answer3: "Mclaren",
-  link: ["MANAGER", "ENGLAND", "FOOTBALL"],
+  link: ["manager", "england", "football"],
 };
 
 const questionLink2: QuestionLink = {
