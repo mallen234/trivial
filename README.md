@@ -1,6 +1,6 @@
-#Trivial - find the link to all questions in the game
+# Trivial - find the link to all questions in the game
 
-A quiz built to rival NYT using Svelte and Vite.
+### A quiz built to rival NYT using Svelte and Vite.
 
 A series of questions are shown on screen with an overarching link
 
