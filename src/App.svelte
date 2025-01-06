@@ -1,14 +1,15 @@
 <script lang="ts">
   import AnswerInput from "./lib/AnswerInput.svelte";
-  import Counter from "./lib/Counter.svelte";
   import Keyboard from "./lib/Keyboard.svelte";
   import { questionBank } from "./api/questions";
   import { userGuess, isGuessCorrect, cluesCount } from "./svelte/store";
   import Congrats from "./lib/Congrats.svelte";
   import Questions from "./lib/Questions.svelte";
   import Header from "./lib/Header.svelte";
+  import HelpScreen from "./lib/HelpScreen.svelte";
 
   let isGuessCorrect_value: boolean;
+  let showHelp: boolean;
   const todaysQuestion = questionBank[0];
   let cluesCount_value: number;
   isGuessCorrect.subscribe((value) => {
@@ -17,6 +18,10 @@
   cluesCount.subscribe((value) => {
     cluesCount_value = value;
   });
+
+  const handleHelpClick = () => {
+    showHelp = !showHelp;
+  };
 
   const handleGuess = (guess: string) => {
     if (todaysQuestion.link.includes(guess)) {
@@ -34,23 +39,27 @@
 </script>
 
 <main>
-  <Header />
-  <div class="main">
-    <Questions {todaysQuestion} {cluesCount} />
-    <div>
-      <p>Clues used : {cluesCount_value}</p>
-    </div>
-    {#if isGuessCorrect_value === false}
+  <Header {handleHelpClick} />
+  {#if showHelp === true}
+    <HelpScreen />
+  {:else}
+    <div class="main">
+      <Questions {todaysQuestion} {cluesCount} />
       <div>
-        <AnswerInput guess={userGuess} />
+        <p>Clues used : {cluesCount_value}</p>
       </div>
-      <div class="keyboard">
-        <Keyboard guess={userGuess} {handleGuess} />
-      </div>
-    {:else if isGuessCorrect_value === true}
-      <Congrats cluesUsed={cluesCount_value} />
-    {/if}
-  </div>
+      {#if isGuessCorrect_value === false}
+        <div>
+          <AnswerInput guess={userGuess} />
+        </div>
+        <div class="keyboard">
+          <Keyboard guess={userGuess} {handleGuess} />
+        </div>
+      {:else if isGuessCorrect_value === true}
+        <Congrats cluesUsed={cluesCount_value} />
+      {/if}
+    </div>
+  {/if}
 </main>
 
 <style>

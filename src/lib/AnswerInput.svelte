@@ -25,6 +25,7 @@
   }
   .answer:disabled {
     background-color: white;
+    color: black;
     /* border: black; */
   }
 </style>

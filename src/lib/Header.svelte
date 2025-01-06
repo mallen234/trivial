@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from "./Icon.svelte";
-  const handleClick = () => {
+  export let handleHelpClick;
+  const handleGithubClick = () => {
     console.log("jere");
     window.location.href = "https://github.com/mallen234/trivial";
   };
@@ -8,13 +9,13 @@
 
 <div class="header" aria-label="header">
   <div class="sub-container">
-    <button class="button-container">
+    <button on:click={handleHelpClick} class="button-container">
       <Icon name="question" width={"18"} height={"22"} />
     </button>
     <div class="title">
       <h2 style="font-size: xxx-large">Trivial</h2>
     </div>
-    <button on:click={handleClick} class="button-container">
+    <button on:click={handleGithubClick} class="button-container">
       <Icon name="github" width={"18"} height={"22"} />
     </button>
   </div>
