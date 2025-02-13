@@ -7,9 +7,11 @@
   import Questions from "./lib/Questions.svelte";
   import Header from "./lib/Header.svelte";
   import HelpScreen from "./lib/HelpScreen.svelte";
+  import OpeningScreen from "./lib/OpeningScreen.svelte";
 
   let isGuessCorrect_value: boolean;
   let showHelp: boolean;
+  let showOpeningScreen: boolean = true;
   const todaysQuestion = questionBank[0];
   let cluesCount_value: number;
   isGuessCorrect.subscribe((value) => {
@@ -36,29 +38,36 @@
     //   }
     // });
   };
+  const handleStartClick = () => {
+    showOpeningScreen = false;
+  };
 </script>
 
 <main>
-  <Header {handleHelpClick} />
-  {#if showHelp === true}
-    <HelpScreen />
+  {#if showOpeningScreen}
+    <OpeningScreen {handleStartClick} />
   {:else}
-    <div class="main">
-      <Questions {todaysQuestion} {cluesCount} />
-      <div>
-        <p>Clues used : {cluesCount_value}</p>
-      </div>
-      {#if isGuessCorrect_value === false}
+    <Header {handleHelpClick} />
+    {#if showHelp}
+      <HelpScreen />
+    {:else}
+      <div class="main">
+        <Questions {todaysQuestion} {cluesCount} />
         <div>
-          <AnswerInput guess={userGuess} />
+          <p>Clues used : {cluesCount_value}</p>
         </div>
-        <div class="keyboard">
-          <Keyboard guess={userGuess} {handleGuess} />
-        </div>
-      {:else if isGuessCorrect_value === true}
-        <Congrats cluesUsed={cluesCount_value} />
-      {/if}
-    </div>
+        {#if isGuessCorrect_value === false}
+          <div>
+            <AnswerInput guess={userGuess} />
+          </div>
+          <div class="keyboard">
+            <Keyboard guess={userGuess} {handleGuess} />
+          </div>
+        {:else if isGuessCorrect_value === true}
+          <Congrats cluesUsed={cluesCount_value} />
+        {/if}
+      </div>
+    {/if}
   {/if}
 </main>
 

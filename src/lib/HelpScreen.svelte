@@ -1,10 +1,10 @@
 <script lang="ts">
 </script>
 
-<div class="header" aria-label="header">
+<div class="text" aria-label="header">
   <h2>How to play</h2>
   <p>
-    Every day there will be a series of questions which have a link, you will
+    Every day there will be a series of questions which have a link. You will
     likely have seen this in pub quizes up and down the UK. You can click on one
     of the questions/clues to reveal the answer but this will reduce your score
     by one.
@@ -18,4 +18,21 @@
 </div>
 
 <style>
+  .text {
+    min-width: none;
+    max-width: 500px;
+
+    background-color: #d5e8ff;
+    background-color: #ffced3;
+
+    /* padding: 0rem 1rem 0rem 1rem; */
+    min-width: none;
+    max-width: 500px;
+    font-family: "Sansita", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: auto;
+  }
 </style>
