@@ -4,6 +4,9 @@
 
 A series of questions are shown on screen with an overarching link
 
+### Check it out here
+https://trivialdaily.netlify.app/
+
 ### Technologies Used
 
 Svelte: A modern framework for building user interfaces.
